@@ -14,4 +14,11 @@ class Controller extends BaseController
     public function homepage(){
         return view('homepage');
     }
+    public function post(){
+        return view('post');
+    }
+    public function settinguser(){
+        return view('settinguser');
+    }
+
 }

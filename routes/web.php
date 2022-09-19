@@ -21,6 +21,8 @@ Route::get('/', function () {
 
 Route::controller(Controller::class)->group(function(){
     Route::get('/', 'homepage')->name('homepage'); 
+    Route::get('/post', 'post')->name('post');
+    Route::get('/setting', 'settinguser')->name('setting');
         
 
 });
