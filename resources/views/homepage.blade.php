@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('main')
 
-    <div class="px-0 py-0 lg:px-6 lg:py-8">
+    <div class="px-0 py-8 lg:px-6 ">
         <div class="container flex justify-between mx-auto">
             <div class="w-full lg:w-6/12 ml-0 lg:ml-[150px]">
                 <div class="px-4 mb-4 bg-white rounded-lg shadow-md ">
@@ -26,9 +26,7 @@
                         {{-- <post :data="post"></post> --}}
 
                         <div class="uk-position-relative uk-visible-toggle uk-light " tabindex="-1" uk-slider>
-                            <ul
-                                class="uk-slider-items uk-child-width-1-2 uk-child-width-1-3@s
-uk-child-width-1-4@m">
+                            <ul class="uk-slider-items uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-4@m">
                                 <li>
                                     <img src="https://getuikit.com/docs/images/slider4.jpg"width="195" height="200"
                                         alt="">
@@ -73,6 +71,7 @@ uk-child-width-1-4@m">
                     </div>
 
                 </div>
+                @include('post.show')
                 {{-- post --}}
                 <div class="px-4 my-4 bg-white rounded-lg shadow-md ">
                     <div class="flex flex-col ">
@@ -127,7 +126,7 @@ uk-child-width-1-4@m">
                         </div>
                         <h1 class="m-1 text-xl font-bold text-center">Home</h1>
 
-                        <p class="px-4 py-1 my-1 text-sm  lg:text-base">Your personal Reddit frontpage. Come here
+                        <p class="px-4 py-1 my-1 text-sm lg:text-base">Your personal Reddit frontpage. Come here
                             to check in with your favorite communities.</p>
 
                         <div class="flex flex-col ">

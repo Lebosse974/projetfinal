@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +20,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+Route::get('/', function () {
+    return view('welcome');
+});
+
 
 Route::controller(Controller::class)->group(function(){
     Route::get('/', 'homepage')->name('homepage'); 
@@ -26,3 +35,15 @@ Route::controller(Controller::class)->group(function(){
         
 
 });
+Route::controller(UserController::class)->group(function(){
+
+    Route::get('/setting', 'settinguser')->name('setting');
+});
+
+Route::controller(PostController::class)->group(function(){
+
+    Route::get('/showPost', 'show')->name('show');
+    Route::get('/showPost', 'show')->name('show');
+});
+
+require __DIR__.'/auth.php';

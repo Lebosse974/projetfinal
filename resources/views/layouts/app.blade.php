@@ -1,3 +1,37 @@
+{{-- <!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
+        <title>{{ config('app.name', 'Laravel') }}</title>
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
+
+        <!-- Scripts -->
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    </head>
+    <body class="font-sans antialiased">
+        <div class="min-h-screen bg-gray-100">
+            @include('layouts.navigation')
+
+            <!-- Page Heading -->
+            <header class="bg-white shadow">
+                <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
+                    {{ $header }}
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <main>
+                {{ $slot }}
+            </main>
+        </div>
+    </body>
+</html> --}}
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -18,19 +52,19 @@
     </head>
     
 <body>
-    <div id="app" class="font-roboto bg-gray-100">
+    <div id="app" class="bg-gray-100 font-roboto">
 
-        <nav class="bg-white px-6 py-4 shadow">
-            <div class="flex flex-col container mx-auto md:flex-row md:items-center md:justify-between">
-                <div class="flex justify-between items-center">
+        <nav class="px-6 py-4 bg-white shadow">
+            <div class="container flex flex-col mx-auto md:flex-row md:items-center md:justify-between">
+                <div class="flex items-center justify-between">
                     <div>
-                        <a class="text-gray-800 text-xl font-bold md:text-2xl" href="#">Meraki <span
+                        <a class="text-xl font-bold text-gray-800 md:text-2xl" href="#">Meraki <span
                                 class="text-blue-500">UI</span></a>
                     </div>
                     <div>
                         <button type="button"
                             class="block text-gray-800 hover:text-gray-600 focus:text-gray-600 focus:outline-none md:hidden">
-                            <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
+                            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
                                 <path
                                     d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z" />
                             </svg>
@@ -39,38 +73,58 @@
                 </div>
                 
                 <div class="flex flex-col md:flex-row md:-mx-4">
-                    <a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="#">Home</a>
+                    <a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="{{ route('homepage') }}">Home</a>
                     <a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="#">Profile</a>
                     <a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="#">Communauté</a>
                     <a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="#">Backend</a>
                 </div>
+                @auth
+                    
                 <div class="flex flex-col md:flex-row md:-mx-4">
                    
                     <a href="#"> <img src="https://i-sam.unimedias.fr/2021/10/01/bienfaits-pommes.jpeg?auto=format%2Ccompress&cs=tinysrgb&h=630&w=1200" class="my-1 w-[41px] h-[35px] md:mx-4 md:my-0 rounded-full uk_drop" alt=""></a>
                     <div uk-drop="mode: click;offset:5">
                         <div class="flex flex-col justify-center  bg-white w-[295px] max-w-sm mx-auto rounded-lg shadow-md">
-                            <div class="  border-b border-black  ">
-                                <div class=" flex hover:bg-slate-300 rounded-lg m-2">
+                            <div class="border-b border-black ">
+                                <div class="flex m-2 rounded-lg hover:bg-slate-300">
                                     <img src="https://i-sam.unimedias.fr/2021/10/01/bienfaits-pommes.jpeg?auto=format%2Ccompress&cs=tinysrgb&h=630&w=1200" class="my-3 w-[41px] h-[35px] mx-2 rounded-full" alt="">
-                                <p class="text-black font-bold mx-3 ">Lebosse974</p>
+                                <p class="mx-3 font-bold text-black ">{{$user->name}}</p>
                                 </div>
                                 
                             </div>
-                            <div class=" flex items-center hover:bg-slate-300 rounded-lg m-1">
+                            <div class="flex items-center m-1 rounded-lg hover:bg-slate-300">
                                 <i class="fa-solid fa-gear"></i>
-                            <p class="text-black font-bold mx-3 ">Setting</p>
+                            <p class="mx-3 font-bold text-black ">Setting</p>
                             </div>
-                            <div class=" flex items-center hover:bg-slate-300 rounded-lg m-1">
+                            @if (Auth::user())
+                            <div class="flex items-center m-1 rounded-lg hover:bg-slate-300">
                                 <i class="fa-solid fa-toolbox"></i>
-                            <p class="text-black font-bold mx-3 ">backend</p>
+                            <p class="mx-3 font-bold text-black ">backend</p>
                             </div>
-                            <div class=" flex items-center hover:bg-slate-300 rounded-lg m-1">
+                            @endif
+                            <div class="flex items-center m-1 rounded-lg hover:bg-slate-300">
                                 <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                            <p class="text-black font-bold mx-3 ">log out</p>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+        
+                                    <x-dropdown-link :href="route('logout')"
+                                            onclick="event.preventDefault();
+                                                        this.closest('form').submit();">
+                                        {{ __('Log Out') }}
+                                    </x-dropdown-link>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
+                @endauth
+                @guest
+                <div>
+                    <a class="mx-3" href="{{route('login')}}"> loggin </a>
+                    <a href="{{route('register')}}"> register </a>
+                </div>
+                    
+                @endguest
             </div>
         </nav>
 
